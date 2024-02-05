@@ -1,0 +1,55 @@
+version: '3'
+services:
+  splunk-otel-collector:
+    image: quay.io/signalfx/splunk-otel-collector:0.92.0
+    command: ["--config=/etc/otel_collector_config_splunk.yml", "--set=service.telemetry.logs.level=debug"]
+    volumes:
+      - ./otel_collector_config_splunk.yml:/etc/otel_collector_config_splunk.yml
+    environment:
+        - SPLUNK_ACCESS_TOKEN=
+        - SPLUNK_API_URL=https://api.us1.signalfx.com
+        - SPLUNK_BUNDLE_DIR=/usr/lib/splunk-otel-collector/agent-bundle
+        - SPLUNK_COLLECTD_DIR=/usr/lib/splunk-otel-collector/agent-bundle/run/collectd
+        - SPLUNK_HEC_TOKEN=
+        - SPLUNK_HEC_URL=https://ingest.us1.signalfx.com/v1/log
+        - SPLUNK_INGEST_URL=https://ingest.us1.signalfx.com
+        - SPLUNK_LISTEN_INTERFACE=127.0.0.1
+        - SPLUNK_TRACE_URL=https://ingest.us1.signalfx.com/v2/trace
+        - SPLUNK_REALM=us1
+        - SPLUNK_MEMORY_TOTAL_MIB=1024
+        - SPLUNK_INSECURE_SKIP_VERIFY=true
+    ports:
+      - "13133:13133"
+      - "14250:14250"
+      - "14268:14268"
+      - "4317:4317"
+      - "4318:4318"
+      - "6060:6060"
+      - "8888:8888"
+      - "9080:9080"
+      - "9411:9411"
+      - "9943:9943"
+      - "18088:8088"
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT=root
+  drupal:
+    image: drupal:latest
+    ports:
+      - 8080:80
+    volumes:
+      - .web:/var/www/html
+      - .vendor:/opt/drupal/vendor
+      - ./composer.json:/opt/drupal/composer.json
+      - ./composer.lock:/opt/drupal/composer.lock
+    links:
+      - mysql
+    environment:
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+      - SIGNALFX_SERVICE_NAME="test-drupal"
+      - SIGNALFX_ENDPOINT_URL='http://localhost:9080/v1/trace'
+      - SIGNALFX_TRACE_GLOBAL_TAGS="deployment.environment:test-drupal-env"
+
+    
