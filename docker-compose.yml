@@ -7,15 +7,15 @@ services:
       - ./otel_collector_config_splunk.yml:/etc/otel_collector_config_splunk.yml
     environment:
         - SPLUNK_ACCESS_TOKEN=
-        - SPLUNK_API_URL=https://api.us1.signalfx.com
+        - SPLUNK_API_URL=https://api.<REALM>.signalfx.com
         - SPLUNK_BUNDLE_DIR=/usr/lib/splunk-otel-collector/agent-bundle
         - SPLUNK_COLLECTD_DIR=/usr/lib/splunk-otel-collector/agent-bundle/run/collectd
         - SPLUNK_HEC_TOKEN=
-        - SPLUNK_HEC_URL=https://ingest.us1.signalfx.com/v1/log
-        - SPLUNK_INGEST_URL=https://ingest.us1.signalfx.com
+        - SPLUNK_HEC_URL=https://ingest.<REALM>.signalfx.com/v1/log
+        - SPLUNK_INGEST_URL=https://ingest.<REALM>.signalfx.com
         - SPLUNK_LISTEN_INTERFACE=127.0.0.1
-        - SPLUNK_TRACE_URL=https://ingest.us1.signalfx.com/v2/trace
-        - SPLUNK_REALM=us1
+        - SPLUNK_TRACE_URL=https://ingest.<REALM>.signalfx.com/v2/trace
+        - SPLUNK_REALM=
         - SPLUNK_MEMORY_TOTAL_MIB=1024
         - SPLUNK_INSECURE_SKIP_VERIFY=true
     ports:
@@ -48,6 +48,7 @@ services:
     environment:
       - MYSQL_USERNAME=root
       - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
       - SIGNALFX_SERVICE_NAME="test-drupal"
       - SIGNALFX_ENDPOINT_URL='http://localhost:9080/v1/trace'
       - SIGNALFX_TRACE_GLOBAL_TAGS="deployment.environment:test-drupal-env"

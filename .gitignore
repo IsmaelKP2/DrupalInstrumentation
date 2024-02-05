@@ -465,6 +465,9 @@ composer.phar
 #
 # Recommended template: PHP.gitignore
 
+.env
+README.html
+
 /wpcs/*
 
 ##### SASS
