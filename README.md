@@ -23,9 +23,9 @@ drupal:
       - MYSQL_USERNAME=root
       - MYSQL_PASSWORD=root
       - MYSQL_ROOT_PASSWORD=root
-      - SIGNALFX_SERVICE_NAME="test-drupal"
+      - SIGNALFX_SERVICE_NAME="<SERVICE_NAME>"
       - SIGNALFX_ENDPOINT_URL='http://localhost:9080/v1/trace'
-      - SIGNALFX_TRACE_GLOBAL_TAGS="deployment.environment:test-drupal-env"
+      - SIGNALFX_TRACE_GLOBAL_TAGS="deployment.environment:<DEPLOYMENT_ENVIRONMENT>"
 ```
 
 ## change the value of REALM and ACCESS_TOKEN in setup.sh 
