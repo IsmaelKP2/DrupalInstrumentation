@@ -4,7 +4,7 @@ before running the example fill the environment variables:
 
 ## docker-compose.yml
 
-fill the environment value for the splunk-otel-collector 
+fill the environment value for the splunk-otel-collector service
 ```
 splunk-otel-collector:
 ...
@@ -14,7 +14,7 @@ splunk-otel-collector:
         - SPLUNK_HEC_TOKEN=
         - SPLUNK_REALM=
 ```
-fill the environment value for the splunk-otel-collector 
+fill the environment value for the drupal service 
 
 ```
 drupal:
