@@ -41,3 +41,13 @@ drupal:
 docker-compose up
 ```
 
+
+# (1) Build the instrumented Drupal service
+docker build -t drupal-signalfx:latest -f Dockerfile
+
+PHP Stuff
+create-project drupal/recommended-project:10.2.2
+composer update
+sudo apt-get update
+sudo apt install php-xml
+sudo apt install php-gd
