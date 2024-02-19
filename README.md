@@ -2,37 +2,22 @@
 
 before running the example fill the environment variables:
 
-## docker-compose.yml
-
-fill the environment value for the splunk-otel-collector service
-```
-splunk-otel-collector:
-...
-    environment:
-        - SPLUNK_ACCESS_TOKEN=
-        - ...
-        - SPLUNK_HEC_TOKEN=
-        - SPLUNK_REALM=
-```
-fill the environment value for the drupal service 
+copy .env.example in .env 
 
 ```
-drupal:
-...
-    environment:
-      - MYSQL_USERNAME=root
-      - MYSQL_PASSWORD=root
-      - SIGNALFX_SERVICE_NAME="<SERVICE_NAME>"
-      - SIGNALFX_ENDPOINT_URL='http://localhost:9080/v1/trace'
-      - SIGNALFX_TRACE_GLOBAL_TAGS="deployment.environment:<DEPLOYMENT_ENVIRONMENT>"
+cp .env.example .env
 ```
 
-## change the value of REALM and ACCESS_TOKEN in setup.sh 
-
+e.g
 ```
---signalfx.endpoint_url=https://ingest.<REALM>.signalfx.com/v2/trace/signalfxv1
---signalfx.access_token=<ACCESS_TOKEN>
---signalfx.service_name=<SERVICE_NAME>
+SPLUNK_ACCES_TOKEN=XXXXXXXXXXXXXXXXXXXXXXX
+REALM=us1
+SPLUNK_REALM=us1
+SPLUNK_HEC_TOKEN=XXXXXXXXXXXXXXXXXXXXXXX
+SERVICE_NAME=test-drupal
+SIGNALFX_SERVICE_NAME=test-drupal
+DEPLOYMENT_ENVIRONMENT=test-drupal-env
+
 ```
 
 # Run the example
@@ -46,7 +31,8 @@ docker-compose up
 docker build -t drupal-signalfx:latest -f Dockerfile
 
 PHP Stuff
-create-project drupal/recommended-project:10.2.2
+composer create-project drupal/recommended-project:10.2.2
+mv recommended-project/* .
 composer update
 sudo apt-get update
 sudo apt install php-xml

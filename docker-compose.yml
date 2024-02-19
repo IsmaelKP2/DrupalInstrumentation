@@ -59,6 +59,6 @@ services:
     environment:
       - MYSQL_USERNAME=root
       - MYSQL_PASSWORD=root
-      - SIGNALFX_TRACE_GLOBAL_TAGS="deployment.environment:<DEPLOYMENT_ENVIRONMENT>"
+      - SIGNALFX_TRACE_GLOBAL_TAGS="deployment.environment:$DEPLOYMENT_ENVIRONMENT
 
     
