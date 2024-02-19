@@ -11,8 +11,8 @@ cp .env.example .env
 e.g
 ```
 SPLUNK_ACCES_TOKEN=XXXXXXXXXXXXXXXXXXXXXXX
-REALM=us1
-SPLUNK_REALM=us1
+REALM=us1|eu0
+SPLUNK_REALM=us1|eu0
 SPLUNK_HEC_TOKEN=XXXXXXXXXXXXXXXXXXXXXXX
 SERVICE_NAME=test-drupal
 SIGNALFX_SERVICE_NAME=test-drupal
@@ -20,13 +20,7 @@ DEPLOYMENT_ENVIRONMENT=test-drupal-env
 
 ```
 
-# (2) Run the example
-
-```
-docker-compose up
-```
-
-# (3) Build the instrumented Drupal service
+# (2) Build the instrumented Drupal service
 
 PHP Stuff
 
@@ -37,4 +31,10 @@ composer update
 sudo apt-get update
 sudo apt install php-xml
 sudo apt install php-gd
+```
+
+# (3) Run the example
+
+```
+docker-compose up
 ```
