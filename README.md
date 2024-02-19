@@ -1,4 +1,4 @@
-# Installation
+# (1) Installation
 
 before running the example fill the environment variables:
 
@@ -20,20 +20,21 @@ DEPLOYMENT_ENVIRONMENT=test-drupal-env
 
 ```
 
-# Run the example
+# (2) Run the example
 
 ```
 docker-compose up
 ```
 
-
-# (1) Build the instrumented Drupal service
-docker build -t drupal-signalfx:latest -f Dockerfile
+# (3) Build the instrumented Drupal service
 
 PHP Stuff
+
+```
 composer create-project drupal/recommended-project:10.2.2
 mv recommended-project/* .
 composer update
 sudo apt-get update
 sudo apt install php-xml
 sudo apt install php-gd
+```
